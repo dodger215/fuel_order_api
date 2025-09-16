@@ -5,6 +5,10 @@ from sqlalchemy.orm import Session
 from typing import List
 import uuid
 from datetime import datetime
+from dotenv import load_dotenv
+
+
+load_dotenv()
 import os
 
 from app.database import get_db, init_db
