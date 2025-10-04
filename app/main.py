@@ -6,7 +6,7 @@ from typing import List
 import uuid
 from datetime import datetime, timedelta
 import os
-
+from app.create_demo_accounts import create_demo_accounts
 from app.database import get_db, init_db
 from app.models import Order, FuelType, OrderStatus, PaymentStatus, User, UserRole
 from app.paystack import paystack_service
@@ -136,6 +136,12 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
         "token_type": "bearer",
         "user": user
     }
+
+
+@app.get("/load/default/user")
+async def load_default_user():
+    create_demo_accounts()
+
 
 @app.get("/auth/me", response_model=UserResponse)
 async def get_current_user_info(current_user: User = Depends(get_current_active_user)):
