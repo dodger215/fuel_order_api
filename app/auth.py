@@ -39,13 +39,13 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         expire = datetime.utcnow() + timedelta(minutes=30)
     
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, os.getenv("SECRET_KEY"), algorithm="HS256")
+    encoded_jwt = jwt.encode(to_encode, "your-super-secret-jwt-key-change-this-in-production-12345", algorithm="HS256")
     return encoded_jwt
 
 def verify_token(token: str, credentials_exception):
     """Verify and decode a JWT token"""
     try:
-        payload = jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=["HS256"])
+        payload = jwt.decode(token, "your-super-secret-jwt-key-change-this-in-production-12345", algorithms=["HS256"])
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
