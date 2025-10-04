@@ -126,7 +126,7 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
             detail="Inactive user account"
         )
     
-    access_token_expires = timedelta(minutes=os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
+    access_token_expires = timedelta(minutes=30)
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
