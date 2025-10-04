@@ -34,12 +34,30 @@ logger = logging.getLogger(__name__)
 
 
 # CORS middleware
+# CORS middleware - Updated configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://fuelapp.vercel.app",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=[
+        "Authorization",
+        "Content-Type",
+        "Accept",
+        "Origin",
+        "X-Requested-With",
+        "Access-Control-Allow-Origin",
+        "Access-Control-Allow-Headers",
+        "Access-Control-Allow-Methods"
+    ],
+    expose_headers=["Content-Length", "Content-Type"],
+    max_age=3600,
 )
 
 # Initialize database
